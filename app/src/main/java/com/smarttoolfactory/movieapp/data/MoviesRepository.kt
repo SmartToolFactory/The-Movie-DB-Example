@@ -1,6 +1,7 @@
 package com.smarttoolfactory.movieapp.data
 
-import com.smarttoolfactory.movieapp.data.model.Movie
+import com.smarttoolfactory.movieapp.data.model.Movies
+import io.reactivex.Observable
 
 /**
  * [MoviesRepository] interface is used for implementing Repository pattern which provides
@@ -8,6 +9,8 @@ import com.smarttoolfactory.movieapp.data.model.Movie
  */
 interface MoviesRepository {
 
+    fun getMovies(): Observable<Movies>
 
+    fun getMoviesSortedBy( sortBy: String): Observable<Movies>
 
 }

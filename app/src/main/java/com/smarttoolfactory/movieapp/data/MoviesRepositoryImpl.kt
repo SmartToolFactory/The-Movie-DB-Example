@@ -1,6 +1,8 @@
 package com.smarttoolfactory.movieapp.data
 
 import com.smarttoolfactory.movieapp.data.model.Movie
+import com.smarttoolfactory.movieapp.data.model.Movies
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -8,6 +10,13 @@ import javax.inject.Inject
  * layer with local, remote and cached providers.
  */
 class MoviesRepositoryImpl @Inject constructor(val moviesDataSource: MoviesDataSource) : MoviesRepository {
+    override fun getMovies(): Observable<Movies> {
+       return moviesDataSource.getMovies()
+    }
+
+    override fun getMoviesSortedBy(sortBy: String): Observable<Movies> {
+        return moviesDataSource.getMoviesSortedBy(sortBy)
+    }
 
 
     // TODO Add caching mechanism

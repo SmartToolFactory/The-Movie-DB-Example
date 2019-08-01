@@ -1,6 +1,7 @@
 package com.smarttoolfactory.movieapp.di
 
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.smarttoolfactory.movieapp.api.MoviesApi
 import com.smarttoolfactory.movieapp.data.MoviesDataSource
 import com.smarttoolfactory.movieapp.data.MoviesRepository
@@ -27,6 +28,7 @@ class AppModule {
         return Retrofit.Builder()
             .baseUrl(MoviesApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build().create(MoviesApi::class.java)
     }
 
@@ -41,8 +43,6 @@ class AppModule {
     /*
         *** Database Injections ***
      */
-
-
 
 
     @Singleton

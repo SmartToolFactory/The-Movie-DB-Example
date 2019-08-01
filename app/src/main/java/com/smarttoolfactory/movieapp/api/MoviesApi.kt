@@ -1,17 +1,21 @@
 package com.smarttoolfactory.movieapp.api
 
 import com.smarttoolfactory.movieapp.data.model.Movies
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
- * Retrofit interface to
+ * Retrofit interface to get movies list from remote source which is The MovieDB in this case
  */
 interface MoviesApi {
 
 
     @GET("3/discover/movie")
-    fun getMovies(): Call<Movies>
+    fun getMovies(@Query("api_key") apiKey: String): Observable<Movies>
+
+    @GET("3/discover/movie")
+    fun getMoviesSortedBy(@Query("api_key") apiKey: String, @Query("sort_by") sortBy: String): Observable<Movies>
 
     companion object {
 
