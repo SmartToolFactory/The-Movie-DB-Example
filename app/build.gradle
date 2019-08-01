@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+
+    compileSdkVersion 28
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.smarttoolfactory.movieapp"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            useProguard false
+        }
+        release {
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    // Material
+    implementation 'com.google.android.material:material:1.0.0'
+    // ViewPager 2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta02'
+    // ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
+
+    // Gson
+    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+
+    // ViewModel and LiveData
+    implementation 'androidx.lifecycle:lifecycle-extensions:' + rootProject.archLifecycleVersion
+
+    // Room
+    implementation 'androidx.room:room-runtime:' + rootProject.roomVersion
+    // For Kotlin use kapt instead of annotationProcessor
+    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation 'androidx.room:room-ktx:' + rootProject.roomVersion
+    // optional - RxJava support for Room
+    implementation 'androidx.room:room-rxjava2:' + rootProject.roomVersion
+
+    // Dagger Core dependencies
+    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+    kapt 'com.google.dagger:dagger-android-processor:' + rootProject.daggerVersion
+    // Dagger Android dependencies
+    implementation 'com.google.dagger:dagger-android-support:' + rootProject.daggerVersion
+
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.rxjavaVersion
+    // RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.rxandroidVersion
+
+    // Leak Canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
+    // MultiDex
+    implementation 'com.android.support:multidex:1.0.3'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
