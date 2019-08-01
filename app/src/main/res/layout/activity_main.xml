@@ -47,7 +47,7 @@
                             android:layout_margin="12dp"
                             android:textStyle="bold"
                             android:textSize="24sp"
-                            android:text="Popular"/>
+                            android:text="@string/title_popular"/>
                     <FrameLayout
                             android:id="@+id/content_frame1"
                             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                             android:layout_margin="12dp"
                             android:textStyle="bold"
                             android:textSize="20sp"
-                            android:text="Top Rated"/>
+                            android:text="@string/title_top_rated"/>
                     <FrameLayout
                             android:id="@+id/content_frame2"
                             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                             android:layout_margin="12dp"
                             android:textStyle="bold"
                             android:textSize="20sp"
-                            android:text="Revenue"/>
+                            android:text="@string/title_revenue"/>
 
                     <FrameLayout
                             android:id="@+id/content_frame3"

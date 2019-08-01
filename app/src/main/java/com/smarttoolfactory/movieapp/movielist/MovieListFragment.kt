@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.smarttoolfactory.movieapp.MainActivity
 import com.smarttoolfactory.movieapp.constant.Constants
 import com.smarttoolfactory.movieapp.databinding.FragmentMovieListBinding
 import com.smarttoolfactory.movieapp.movielist.adapter.MovieListAdapter
@@ -17,6 +19,10 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
+/**
+ * Fragment that displays multiple lists, each list is created by filter type which is passed as an argument by on
+ * instantion of fragment via newInstance() method
+ */
 class MovieListFragment : DaggerFragment(), EndlessScrollListener.ScrollToBottomListener {
 
 
@@ -33,21 +39,16 @@ class MovieListFragment : DaggerFragment(), EndlessScrollListener.ScrollToBottom
     private lateinit var endlessScrollListener: EndlessScrollListener
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
+        // 🔥 This viewModel uses Fragment instead of Activity since it's unique for each movie list
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel::class.java)
 
 
         arguments?.apply {
             var sortBy =getString(Constants.SORT_FILTER)
 
-            println("MovieListFragment onCreate() sortBy: $sortBy, this: $this")
             viewModel.sortBy = getString(Constants.SORT_FILTER)
         }
 
@@ -57,7 +58,7 @@ class MovieListFragment : DaggerFragment(), EndlessScrollListener.ScrollToBottom
 
         dataBinding.viewmodel = viewModel
 
-        // 🔥 This is required if LiveData is used for data-binding
+        // 🔥 This is required if LiveData is used for data-binding, This fragment is using ViewModel for to set app:Items property of RecyclerView
         dataBinding.lifecycleOwner = this
 
         // Set RecyclerView layout manager, adapter, and scroll listener for infinite scrolling
@@ -77,6 +78,10 @@ class MovieListFragment : DaggerFragment(), EndlessScrollListener.ScrollToBottom
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getMovieList()
+
+        viewModel.openMovieDetailsEvent.observe(this, Observer {
+            (activity as? MainActivity)?.displayMovieDetails(it)
+        })
     }
 
     override fun onScrollToBottom() {

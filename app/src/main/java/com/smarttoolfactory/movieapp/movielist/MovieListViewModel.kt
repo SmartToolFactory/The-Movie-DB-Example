@@ -7,10 +7,10 @@ import com.smarttoolfactory.movieapp.constant.Constants
 import com.smarttoolfactory.movieapp.data.MoviesRepository
 import com.smarttoolfactory.movieapp.data.model.Movie
 import com.smarttoolfactory.movieapp.domain.GetMoviesUseCase
+import com.smarttoolfactory.movieapp.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 
@@ -21,9 +21,6 @@ constructor(
 ) : ViewModel() {
 
     var sortBy = Constants.SORT_BY_POPULARITY
-
-    private var page: Int = 1
-    private val pagination = BehaviorSubject.create<Int>()
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -37,18 +34,21 @@ constructor(
      */
     val items: LiveData<List<Movie>> = movies
 
-    init {
+    /**
+     * SingleLiveEvent for opening movie details via databinding.
+     *
+     * ⚠️ This method is called by movie_item of any RecyclerView adapter
+     */
+
+    val openMovieDetailsEvent = SingleLiveEvent<Movie>()
 
 
-    }
+    val testData = MutableLiveData<Boolean>()
 
-
+    /**
+     * Gets movies list from [GetMoviesUseCase]
+     */
     fun getMovieList() {
-
-        page++
-        pagination.onNext(page)
-
-        pagination.onNext(1)
 
         val disposable = getMoviesUseCase.getMovies(sortBy)
             .subscribeOn(Schedulers.io())
@@ -69,6 +69,14 @@ constructor(
 
         compositeDisposable.add(disposable)
 
+    }
+
+    /**
+     * Opens detail activity or detail fragment depending on device or orientation
+     */
+    fun openMovieDetails(movie: Movie) {
+        openMovieDetailsEvent.value = movie
+        testData.value = true
     }
 
     override fun onCleared() {

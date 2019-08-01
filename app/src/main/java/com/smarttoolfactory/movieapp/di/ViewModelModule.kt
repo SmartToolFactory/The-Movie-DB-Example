@@ -3,6 +3,7 @@ package com.smarttoolfactory.movieapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.smarttoolfactory.movieapp.moviedetail.MovieDetailViewModel
 import com.smarttoolfactory.movieapp.movielist.MovieListViewModel
 import com.smarttoolfactory.movieapp.viewmodel.CustomViewModelFactory
 import dagger.Binds
@@ -20,11 +21,17 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelModule {
 
+    // Map MovieDetailViewModel to MovieDetailViewModel.class using this as a key
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailViewModel::class)
+    abstract fun bindMovieDetailViewModel (movieDetailViewModel: MovieDetailViewModel): ViewModel
 
+    // Map MovieListViewModel to MovieListViewModel.class using this as a key
     @Binds
     @IntoMap
     @ViewModelKey(MovieListViewModel::class)
-    abstract fun bindMovieListViewModel(tasksViewModel: MovieListViewModel): ViewModel
+    abstract fun bindMovieListViewModel(movieListViewModel: MovieListViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: CustomViewModelFactory): ViewModelProvider.Factory

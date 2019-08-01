@@ -1,17 +1,19 @@
 package com.smarttoolfactory.movieapp.domain
 
+import com.smarttoolfactory.movieapp.base.BaseUseCase
 import com.smarttoolfactory.movieapp.data.MoviesRepository
 import com.smarttoolfactory.movieapp.data.model.Movie
 import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
- * This UseCase is only responsible of retrieving data from DB or remote data source via [MoviesRepository]. Data returned
- * from db is filtered and might be queried via search function
+ * This UseCase is only responsible of retrieving data from DB or remote data source via [MoviesRepository].
+ * Also applies paginationList to the list retrieved from [MoviesRepository]
+ *
  */
 class GetMoviesUseCase @Inject constructor(private val repository: MoviesRepository) : BaseUseCase() {
 
-    private var pagination = mutableListOf<Movie>()
+    private var paginationList = mutableListOf<Movie>()
 
     private var page: Int = 0
 
@@ -21,13 +23,14 @@ class GetMoviesUseCase @Inject constructor(private val repository: MoviesReposit
     ): Observable<List<Movie>> {
 
         page++
+
         return repository
             .getMoviesSortedBy(page, sortBy)
             .flatMap {
                 Observable.just(it.results)
             }.map {
-                pagination.addAll(it)
-                pagination
+                paginationList.addAll(it)
+                paginationList
             }
     }
 

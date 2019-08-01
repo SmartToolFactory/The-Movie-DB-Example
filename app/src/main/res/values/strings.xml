@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_revenue">Revenue</string>
+    <string name="catalog">Catalog</string>
+    <string name="details">Details</string>
 </resources>

@@ -2,6 +2,7 @@ package com.smarttoolfactory.movieapp.di
 
 
 import com.smarttoolfactory.movieapp.MainActivity
+import com.smarttoolfactory.movieapp.moviedetail.MovieDetailActivity
 
 
 import dagger.Module
@@ -17,4 +18,9 @@ abstract class ActivityContributorModule {
     abstract fun contributeMainActivity(): MainActivity
 
 
+    /**
+    Defines which fragments will be used by [MovieDetailActivity]
+     */
+    @ContributesAndroidInjector(modules = [DetailFragmentContributorModule::class])
+    abstract fun contributeMainMovieDetailActivity(): MovieDetailActivity
 }

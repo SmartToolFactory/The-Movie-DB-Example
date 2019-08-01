@@ -1,4 +1,4 @@
-package com.smarttoolfactory.movieapp.domain
+package com.smarttoolfactory.movieapp.base
 
 
 abstract class BaseUseCase {

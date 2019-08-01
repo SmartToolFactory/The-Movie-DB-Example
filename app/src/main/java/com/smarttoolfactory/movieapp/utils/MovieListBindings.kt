@@ -9,7 +9,6 @@ import com.smarttoolfactory.movieapp.R
 import com.smarttoolfactory.movieapp.constant.Constants
 import com.smarttoolfactory.movieapp.data.model.Movie
 import com.smarttoolfactory.movieapp.movielist.adapter.MovieListAdapter
-import java.lang.Exception
 
 /*
     *** Bindings for List ***
@@ -39,7 +38,26 @@ fun setImageUrl(view: ImageView, url: String?) {
         requestOptions.placeholder(R.drawable.ic_image_placeholder_darker)
         requestOptions.error(R.drawable.ic_image_placeholder_grey)
 
-        val urlFinal  = Constants.SMALL_IMAGE_URL + url
+        val urlFinal = Constants.SMALL_IMAGE_URL + url
+
+        Glide.with(view.context)
+            .setDefaultRequestOptions(requestOptions)
+            .load(urlFinal)
+            .into(view)
+    } catch (e: Exception) {
+        print("🥶🥶 MovieListBindings setImageUrl() exception ${e.message}")
+    }
+}
+
+@BindingAdapter("android:urlOriginal")
+fun setImageUrlOriginal(view: ImageView, url: String?) {
+
+    try {
+        val requestOptions = RequestOptions()
+        requestOptions.placeholder(R.drawable.ic_image_placeholder_darker)
+        requestOptions.error(R.drawable.ic_image_placeholder_grey)
+
+        val urlFinal = Constants.ORIGINAL_IMAGE_URL + url
 
         Glide.with(view.context)
             .setDefaultRequestOptions(requestOptions)

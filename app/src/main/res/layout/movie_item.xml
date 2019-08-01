@@ -13,6 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="180dp"
+            android:onClick="@{() -> viewmodel.openMovieDetails(movie)}"
             android:layout_height="match_parent"
             android:layout_marginRight="4dp"
             android:orientation="horizontal">
@@ -26,7 +27,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" android:adjustViewBounds="true"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:adjustViewBounds="true"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView
