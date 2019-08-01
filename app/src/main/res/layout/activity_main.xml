@@ -31,7 +31,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
 
-            <!-- FrameLayout contains Fragment -->
+            <!-- FrameLayout contains List Fragment -->
 
             <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
                                                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -41,34 +41,37 @@
                               android:layout_height="match_parent"
                               android:orientation="vertical">
 
-                    <TextView android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:layout_margin="12dp"
-                              android:textStyle="bold"
-                              android:textSize="24sp"
-                              android:text="Popular"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:textStyle="bold"
+                            android:textSize="24sp"
+                            android:text="Popular"/>
                     <FrameLayout
-                            android:id="@+id/content_frame"
+                            android:id="@+id/content_frame1"
                             android:layout_width="match_parent"
                             android:layout_height="260dp"/>
 
-                    <TextView android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:layout_margin="12dp"
-                              android:textStyle="bold"
-                              android:textSize="20sp"
-                              android:text="Top Rated"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:text="Top Rated"/>
                     <FrameLayout
                             android:id="@+id/content_frame2"
                             android:layout_width="match_parent"
                             android:layout_height="260dp"/>
 
-                    <TextView android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:layout_margin="12dp"
-                              android:textStyle="bold"
-                              android:textSize="20sp"
-                              android:text="Revenue"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:text="Revenue"/>
 
                     <FrameLayout
                             android:id="@+id/content_frame3"

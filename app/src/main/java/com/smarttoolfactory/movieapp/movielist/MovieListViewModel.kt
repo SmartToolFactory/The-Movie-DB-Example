@@ -20,12 +20,10 @@ constructor(
     private val getMoviesUseCase: GetMoviesUseCase
 ) : ViewModel() {
 
-
-    var sortBy = Constants.SORT_BY_POPULAR
+    var sortBy = Constants.SORT_BY_POPULARITY
 
     private var page: Int = 1
     private val pagination = BehaviorSubject.create<Int>()
-
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -33,7 +31,6 @@ constructor(
         value = emptyList()
     }
 
-    private var paginationList = mutableListOf<Movie>()
     /**
      * Live data that contains movies. This liveData is also used for databinding with list via
      *   app:items=
@@ -53,18 +50,13 @@ constructor(
 
         pagination.onNext(1)
 
-        val disposable = getMoviesUseCase.getMovies(paginationList, sortBy, pagination)
+        val disposable = getMoviesUseCase.getMovies(sortBy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     println("🥳 MovieListViewModel getMovies() onSuccess() $it")
-                    it?.apply {
-                        var mv = mutableListOf<Movie>()
-                        mv.addAll(movies.value!!)
-                        mv.addAll(this)
-                        movies.value = mv
-                    }
+                    movies.value = it
                 },
                 {
                     println("🥺 MovieListViewModel getMovies() onError() ${it.message}")
@@ -75,10 +67,13 @@ constructor(
                 }
             )
 
+        compositeDisposable.add(disposable)
+
     }
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
+        getMoviesUseCase.dispose()
     }
 }

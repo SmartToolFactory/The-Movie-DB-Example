@@ -53,11 +53,11 @@ class MainActivity : DaggerAppCompatActivity() {
         val toolbar = dataBinding.toolbar
         setSupportActionBar(toolbar)
 
-        val fragment = MovieListFragment.newInstance(Constants.SORT_BY_POPULAR)
+        val fragment = MovieListFragment.newInstance(Constants.SORT_BY_POPULARITY)
         supportFragmentManager
             .beginTransaction()
 //                    .addToBackStack(null)
-            .replace(R.id.content_frame, fragment)
+            .replace(R.id.content_frame1, fragment)
             .commit()
 
 

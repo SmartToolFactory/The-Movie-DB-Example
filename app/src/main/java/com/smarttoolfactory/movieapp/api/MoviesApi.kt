@@ -32,12 +32,7 @@ interface MoviesApi {
     fun getMovies(@QueryMap queryMap: Map<String, String>): Observable<Movies>
 
 
-    companion object {
 
-        const val BASE_URL = "https://api.themoviedb.org/"
-
-        const val API_KEY = "114fe6670282f6a632638661e5e86dee"
-    }
 
 
 }

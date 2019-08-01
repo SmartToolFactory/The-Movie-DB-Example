@@ -3,7 +3,6 @@ package com.smarttoolfactory.movieapp.domain
 import com.smarttoolfactory.movieapp.data.MoviesRepository
 import com.smarttoolfactory.movieapp.data.model.Movie
 import io.reactivex.Observable
-import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 /**
@@ -12,18 +11,24 @@ import javax.inject.Inject
  */
 class GetMoviesUseCase @Inject constructor(private val repository: MoviesRepository) : BaseUseCase() {
 
+    private var pagination = mutableListOf<Movie>()
+
     private var page: Int = 0
 
     fun getMovies(
-        movieList: MutableList<Movie>,
-        sortBy: String,
-        pagination: BehaviorSubject<Int>
+        sortBy: String
+
     ): Observable<List<Movie>> {
 
         page++
-        return repository.getMoviesSortedBy(page, sortBy).map {
-            it.results
-        }
+        return repository
+            .getMoviesSortedBy(page, sortBy)
+            .flatMap {
+                Observable.just(it.results)
+            }.map {
+                pagination.addAll(it)
+                pagination
+            }
     }
 
 
