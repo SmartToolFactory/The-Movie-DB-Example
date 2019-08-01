@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+                name="viewmodel"
+                type="com.smarttoolfactory.movieapp.movielist.MovieListViewModel"/>
 
     </data>
 
@@ -16,7 +19,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_height="match_parent"
                 android:scrollbars="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:items="@{viewmodel.items}"/>
 
     </RelativeLayout>
 

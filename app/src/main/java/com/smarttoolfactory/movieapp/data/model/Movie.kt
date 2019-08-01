@@ -1,9 +1,11 @@
 package com.smarttoolfactory.movieapp.data.model
 
-import androidx.room.Entity
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movie(
 
     @SerializedName("vote_count")
@@ -48,4 +50,4 @@ data class Movie(
     @SerializedName("release_date")
     @Expose
     var releaseDate: String? = null
-)
+) : Parcelable

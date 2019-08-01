@@ -45,6 +45,10 @@ class AppModule {
      */
 
 
+    /*
+        *** Repository Injections ***
+     */
+
     @Singleton
     @Provides
     fun provideRepository(moviesDataSource: MoviesDataSource): MoviesRepository {

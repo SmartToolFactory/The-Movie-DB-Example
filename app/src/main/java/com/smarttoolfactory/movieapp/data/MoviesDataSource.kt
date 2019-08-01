@@ -5,8 +5,10 @@ import io.reactivex.Observable
 
 interface MoviesDataSource {
 
-    fun getMovies(): Observable<Movies>
+    fun getMovies(page: Int): Observable<Movies>
 
-    fun getMoviesSortedBy(sortBy: String): Observable<Movies>
+    fun getMoviesSortedBy( page: Int, sortBy: String): Observable<Movies>
+
+    fun getMovies(queryMap : Map<String, String>): Observable<Movies>
 
 }

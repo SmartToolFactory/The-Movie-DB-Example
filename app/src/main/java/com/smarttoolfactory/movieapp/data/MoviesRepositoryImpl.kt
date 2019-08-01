@@ -10,12 +10,17 @@ import javax.inject.Inject
  * layer with local, remote and cached providers.
  */
 class MoviesRepositoryImpl @Inject constructor(val moviesDataSource: MoviesDataSource) : MoviesRepository {
-    override fun getMovies(): Observable<Movies> {
-       return moviesDataSource.getMovies()
+
+    override fun getMovies(page: Int): Observable<Movies> {
+       return moviesDataSource.getMovies(page)
     }
 
-    override fun getMoviesSortedBy(sortBy: String): Observable<Movies> {
-        return moviesDataSource.getMoviesSortedBy(sortBy)
+    override fun getMoviesSortedBy( page: Int,sortBy: String): Observable<Movies> {
+        return moviesDataSource.getMoviesSortedBy( page, sortBy)
+    }
+
+    override fun getMovies(queryMap: Map<String, String>): Observable<Movies> {
+        return moviesDataSource.getMovies(queryMap)
     }
 
 
