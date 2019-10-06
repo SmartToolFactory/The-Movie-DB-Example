@@ -34,7 +34,7 @@ class MovieListFragment : DaggerFragment(), EndlessScrollListener.ScrollToBottom
     private lateinit var dataBinding: FragmentMovieListBinding
 
     /**
-     * Listener for listening scrolling to last item of Recyclerview
+     * Listener for listening scrolling to last item of RecyclerView
      */
     private lateinit var endlessScrollListener: EndlessScrollListener
 

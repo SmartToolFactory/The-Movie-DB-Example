@@ -1,15 +1,17 @@
 package com.smarttoolfactory.movieapp
 
+import android.content.Context
 import android.content.Intent
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.smarttoolfactory.movieapp.constant.Constants
 import com.smarttoolfactory.movieapp.data.model.Movie
 import com.smarttoolfactory.movieapp.databinding.ActivityMainBinding
-import com.smarttoolfactory.movieapp.databinding.FragmentMovieListBinding
 import com.smarttoolfactory.movieapp.moviedetail.MovieDetailActivity
 import com.smarttoolfactory.movieapp.moviedetail.MovieDetailFragment
 import com.smarttoolfactory.movieapp.movielist.MovieListFragment
@@ -88,23 +90,35 @@ class MainActivity : DaggerAppCompatActivity() {
      * Display movie details as list fragment for tablets or landscape orientation or open movie details
      */
     fun displayMovieDetails(movie: Movie) {
+
+
         val isMultiPane = (findViewById<View>(R.id.content_frame_details) != null)
 
 
-        Toast.makeText(this, "MainActivity displayMovieDetails() isMultiPane: $isMultiPane", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this,
+            "MainActivity displayMovieDetails() isMultiPane: $isMultiPane",
+            Toast.LENGTH_SHORT
+        ).show()
 
         if (isMultiPane) {
 
             val fragment = MovieDetailFragment.newInstance(movie)
+
             supportFragmentManager
                 .beginTransaction()
-                    .addToBackStack(null)
+                .addToBackStack(null)
                 .replace(R.id.content_frame_details, fragment)
                 .commit()
+
         } else {
+
+            val bundle = bundleOf("Hello" to "hello_key")
+
             val intent = Intent(this@MainActivity, MovieDetailActivity::class.java)
             intent.putExtra(Constants.BUNDLE_MOVIE, movie)
             startActivity(intent)
+
         }
 
 

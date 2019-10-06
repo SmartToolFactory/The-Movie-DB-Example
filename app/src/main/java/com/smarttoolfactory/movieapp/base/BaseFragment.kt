@@ -20,9 +20,6 @@ abstract class BaseFragment<T : ViewDataBinding> : DaggerFragment() {
     /**
      * Point that contains width and height of the fragment.
      *
-     *
-     * Dimensions are required for getting projection to get coordinates of each side of the fragment
-     *
      */
     private val dimensions = Point()
 
@@ -30,7 +27,7 @@ abstract class BaseFragment<T : ViewDataBinding> : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        println("BaseFragment onCreateView()")
 
-        // Each fragment can have it's seprate toolbar menu
+        // Each fragment can have it's seperate toolbar menu
         setHasOptionsMenu(true)
 
         dataBinding =
@@ -42,8 +39,6 @@ abstract class BaseFragment<T : ViewDataBinding> : DaggerFragment() {
         rootView?.post {
             dimensions.x = rootView.width
             dimensions.y = rootView.height
-
-//            println("onCreateView() -> post() width: " + dimensions.x + ", height: " + dimensions.y)
         }
 
         return rootView

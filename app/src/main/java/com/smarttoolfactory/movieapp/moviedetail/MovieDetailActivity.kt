@@ -29,7 +29,6 @@ class MovieDetailActivity : DaggerAppCompatActivity() {
 
     private lateinit var dataBinding: ActivityMovieDetailBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,6 +62,7 @@ class MovieDetailActivity : DaggerAppCompatActivity() {
             .beginTransaction()
             .replace(R.id.movie_detail_frame, fragment)
             .commit()
+
     }
 
 

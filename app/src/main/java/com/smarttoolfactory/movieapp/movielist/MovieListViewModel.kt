@@ -37,13 +37,11 @@ constructor(
     /**
      * SingleLiveEvent for opening movie details via databinding.
      *
-     * ⚠️ This method is called by movie_item of any RecyclerView adapter
+     * ⚠️ This method is called by movie_item of RecyclerView adapter
      */
 
     val openMovieDetailsEvent = SingleLiveEvent<Movie>()
 
-
-    val testData = MutableLiveData<Boolean>()
 
     /**
      * Gets movies list from [GetMoviesUseCase]
@@ -76,7 +74,6 @@ constructor(
      */
     fun openMovieDetails(movie: Movie) {
         openMovieDetailsEvent.value = movie
-        testData.value = true
     }
 
     override fun onCleared() {

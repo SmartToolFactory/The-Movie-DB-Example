@@ -18,6 +18,5 @@ object Constants {
     const val SORT_BY_REVENUE = "revenue.desc"
 
     // Bundle key for passing Movie to details activity
-
     const val BUNDLE_MOVIE = "BUNDLE_MOVIE"
 }

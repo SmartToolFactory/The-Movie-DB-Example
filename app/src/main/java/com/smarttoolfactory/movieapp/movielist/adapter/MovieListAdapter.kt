@@ -11,6 +11,9 @@ import com.smarttoolfactory.movieapp.movielist.MovieListViewModel
 
 /**
  * Adapter for the movie list. Has a reference to the [MovieListViewModel] to send actions back to it.
+ *
+ * Layout of the rows is determined by type of the binding class. For this adapter it's [MovieItemBinding]
+ * which is retrieved from movie_item.xml
  */
 class MovieListAdapter(private val viewModel: MovieListViewModel) :
     ListAdapter<Movie, MovieListAdapter.CustomViewHolder>(TaskDiffCallback()) {
@@ -22,17 +25,18 @@ class MovieListAdapter(private val viewModel: MovieListViewModel) :
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = getItem(position)
-//        println("🔥🔥 MoviesAdapter onBindViewHolder() position: $position, holder: $holder")
+        println("🔥🔥 MoviesAdapter onBindViewHolder() position: $position, holder: $holder")
         holder.bind(viewModel, item)
     }
 
     override fun onViewRecycled(holder: CustomViewHolder) {
         super.onViewRecycled(holder)
-//        println("🥶🥶 MoviesAdapter onViewRecycled() holder $holder")
+        println("🥶🥶 MoviesAdapter onViewRecycled() holder $holder")
     }
 
 
-    class CustomViewHolder private constructor(val binding: MovieItemBinding) :
+    // 🔥🔥🔥 movie_item.xml is bounded as MovieItemBinding
+    class CustomViewHolder private constructor(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(viewModel: MovieListViewModel, item: Movie) {

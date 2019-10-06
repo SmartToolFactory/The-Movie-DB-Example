@@ -11,7 +11,6 @@ import javax.inject.Inject
 class RemoteMoviesDataSource @Inject constructor(val moviesApi: MoviesApi) : MoviesDataSource {
 
     override fun getMovies(page: Int): Observable<Movies> {
-        println("RemoteMoviesDataSource getMovies() page $page")
         return moviesApi.getMovies(Constants.API_KEY, page)
     }
 

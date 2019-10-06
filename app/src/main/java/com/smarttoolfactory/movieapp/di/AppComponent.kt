@@ -15,7 +15,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 /*
  * [ActivityContributorModule] defines which Activities will have which modules and inject objects
  * If an Activity has any fragments it should add them via FragmentContributorModule with @ContributesAndroidInjector
- * @ContributesAndroidInjector(modules = {TasksActivity.class, FragmentContributorModule.class})
+ * @ContributesAndroidInjector(modules = {MoviesActivity.class, FragmentContributorModule.class})
  */
 
 @Singleton

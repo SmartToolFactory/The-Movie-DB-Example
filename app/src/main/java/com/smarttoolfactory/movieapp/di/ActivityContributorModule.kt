@@ -22,5 +22,5 @@ abstract class ActivityContributorModule {
     Defines which fragments will be used by [MovieDetailActivity]
      */
     @ContributesAndroidInjector(modules = [DetailFragmentContributorModule::class])
-    abstract fun contributeMainMovieDetailActivity(): MovieDetailActivity
+    abstract fun contributeMovieDetailActivity(): MovieDetailActivity
 }
